@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Arka plan dairesi -->
+  <circle cx="32" cy="32" r="30" fill="#00ADB5" />
+  
+  <!-- Tırnak işareti - sol -->
+  <path d="M20 20 Q16 24 16 30 L22 30 L22 40 L12 40 L12 30 Q12 22 16 16 Q20 14 22 14 Z" fill="white" />
+  
+  <!-- Tırnak işareti - sağ -->
+  <path d="M42 20 Q38 24 38 30 L44 30 L44 40 L34 40 L34 30 Q34 22 38 16 Q42 14 44 14 Z" fill="white" />
+  
+  <!-- DQ harfleri (isteğe bağlı) -->
+  <text x="26" y="54" font-family="Arial" font-weight="bold" font-size="14" fill="white">DQ</text>
+</svg> 
