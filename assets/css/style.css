@@ -1,0 +1,249 @@
+/* DailyQuote - Günün Sözü Stil Dosyası */
+
+/* Tema Değişkenleri */
+:root {
+    --background: #FDFDFD;
+    --card-bg: #fff;
+    --text-color: #222831;
+    --text-secondary: #555;
+    --primary-color: #00ADB5;
+    --primary-hover: #008e96;
+    --secondary-bg: #eee;
+    --secondary-hover: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --favorite-item-bg: #f8f8f8;
+}
+
+[data-theme="dark"] {
+    --background: #1c1c1c;
+    --card-bg: #2d2d2d;
+    --text-color: #f0f0f0;
+    --text-secondary: #aaa;
+    --primary-color: #00ADB5;
+    --primary-hover: #00c3cc;
+    --secondary-bg: #444;
+    --secondary-hover: #555;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --favorite-item-bg: #3a3a3a;
+}
+
+/* Genel Stiller */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    background-color: var(--card-bg);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Başlık */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Tema Değiştirme Butonu */
+.theme-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(30deg);
+}
+
+/* Ana İçerik */
+main {
+    margin-bottom: 30px;
+}
+
+.quote-container {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+blockquote {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    position: relative;
+    padding: 0 20px;
+}
+
+blockquote::before,
+blockquote::after {
+    content: '"';
+    font-size: 36px;
+    color: var(--primary-color);
+}
+
+blockquote::after {
+    content: '"';
+}
+
+.author {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-secondary);
+    text-align: right;
+}
+
+.author::before {
+    content: "— ";
+}
+
+/* Butonlar ve Aksiyonlar */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.secondary {
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+}
+
+.secondary:hover {
+    background-color: var(--secondary-hover);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.favorites-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.favorites-link:hover {
+    text-decoration: underline;
+}
+
+/* Favoriler Sayfası */
+.favorites-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.favorite-item {
+    background-color: var(--favorite-item-bg);
+    padding: 20px;
+    border-radius: 6px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.favorite-quote {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.favorite-author {
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #ff6b6b;
+}
+
+.delete-btn:hover {
+    color: #ff0000;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+    
+    blockquote {
+        font-size: 20px;
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+} 
