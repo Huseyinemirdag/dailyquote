@@ -1,13 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- Arka plan dairesi -->
-  <circle cx="32" cy="32" r="30" fill="#00ADB5" />
+  <!-- Arka plan -->
+  <rect width="64" height="64" rx="12" fill="#00ADB5" />
   
-  <!-- Tırnak işareti - sol -->
-  <path d="M20 20 Q16 24 16 30 L22 30 L22 40 L12 40 L12 30 Q12 22 16 16 Q20 14 22 14 Z" fill="white" />
+  <!-- Konuşma balonu şekli (kitap simgesi) -->
+  <path d="M16 18 L48 18 Q52 18 52 22 L52 36 Q52 40 48 40 L36 40 L32 46 L28 40 L16 40 Q12 40 12 36 L12 22 Q12 18 16 18 Z" fill="white" />
   
-  <!-- Tırnak işareti - sağ -->
-  <path d="M42 20 Q38 24 38 30 L44 30 L44 40 L34 40 L34 30 Q34 22 38 16 Q42 14 44 14 Z" fill="white" />
-  
-  <!-- DQ harfleri (isteğe bağlı) -->
-  <text x="26" y="54" font-family="Arial" font-weight="bold" font-size="14" fill="white">DQ</text>
+  <!-- Tırnak işaretleri (konuşma balonu içinde) -->
+  <path d="M22 26 L22 32 L26 32 L26 26 L22 26 M38 26 L38 32 L42 32 L42 26 L38 26" fill="#00ADB5" stroke="#00ADB5" stroke-width="1" />
 </svg> 
