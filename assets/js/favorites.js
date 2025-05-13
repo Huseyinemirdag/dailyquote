@@ -3,6 +3,40 @@
 // DOM Elementleri
 const favoritesContainer = document.getElementById('favorites-container');
 const themeToggleBtn = document.getElementById('theme-toggle');
+const toastContainer = document.getElementById('toast-container');
+
+// Toast Bildirim Göster
+function showToast(message, type = 'success') {
+    // Yeni toast elementi oluştur
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    // Toast içeriği
+    toast.innerHTML = `
+        <span class="toast-message">${message}</span>
+        <button class="toast-close">✕</button>
+    `;
+    
+    // Toast'u konteynere ekle
+    toastContainer.appendChild(toast);
+    
+    // Toast animasyonu ve otomatik kapanma
+    setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s ease-out forwards';
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }, 3000);
+    
+    // Kapatma butonuna tıklama olayı
+    const closeBtn = toast.querySelector('.toast-close');
+    closeBtn.addEventListener('click', () => {
+        toast.style.animation = 'fadeOut 0.3s ease-out forwards';
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    });
+}
 
 // Favorileri Yükle ve Göster
 function loadAndDisplayFavorites() {
@@ -45,6 +79,9 @@ function removeFavorite(event) {
     // localStorage'dan favorileri al
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     
+    // Silinecek sözü kaydet
+    const removedQuote = favorites[index];
+    
     // İlgili favoriyi sil
     if (index >= 0 && index < favorites.length) {
         favorites.splice(index, 1);
@@ -54,6 +91,9 @@ function removeFavorite(event) {
         
         // Favorileri yeniden göster
         loadAndDisplayFavorites();
+        
+        // Bildirim göster
+        showToast(`"${removedQuote.text.substring(0, 20)}..." silindi`, 'warning');
     }
 }
 

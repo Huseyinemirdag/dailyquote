@@ -6,6 +6,7 @@ const quoteAuthor = document.getElementById('quote-author');
 const newQuoteBtn = document.getElementById('new-quote');
 const addFavoriteBtn = document.getElementById('add-favorite');
 const themeToggleBtn = document.getElementById('theme-toggle');
+const toastContainer = document.getElementById('toast-container');
 
 // Geçerli söz
 let currentQuote = null;
@@ -74,6 +75,39 @@ const quotes = [
   }
 ];
 
+// Toast Bildirim Göster
+function showToast(message, type = 'success') {
+    // Yeni toast elementi oluştur
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    // Toast içeriği
+    toast.innerHTML = `
+        <span class="toast-message">${message}</span>
+        <button class="toast-close">✕</button>
+    `;
+    
+    // Toast'u konteynere ekle
+    toastContainer.appendChild(toast);
+    
+    // Toast animasyonu ve otomatik kapanma
+    setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s ease-out forwards';
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }, 3000);
+    
+    // Kapatma butonuna tıklama olayı
+    const closeBtn = toast.querySelector('.toast-close');
+    closeBtn.addEventListener('click', () => {
+        toast.style.animation = 'fadeOut 0.3s ease-out forwards';
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    });
+}
+
 // Rastgele söz göster
 function displayRandomQuote() {
     if (quotes.length === 0) {
@@ -104,9 +138,9 @@ function addToFavorites() {
     if (!isAlreadyFavorite) {
         favorites.push(currentQuote);
         localStorage.setItem('favorites', JSON.stringify(favorites));
-        alert('Söz favorilerinize eklendi!');
+        showToast('Söz favorilerinize eklendi!', 'success');
     } else {
-        alert('Bu söz zaten favorilerinizde!');
+        showToast('Bu söz zaten favorilerinizde!', 'warning');
     }
 }
 

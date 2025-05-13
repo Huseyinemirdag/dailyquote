@@ -12,6 +12,9 @@
     --secondary-hover: #ddd;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --favorite-item-bg: #f8f8f8;
+    --toast-bg: rgba(0, 0, 0, 0.8);
+    --toast-success: #4caf50;
+    --toast-warning: #ff9800;
 }
 
 [data-theme="dark"] {
@@ -25,6 +28,9 @@
     --secondary-hover: #555;
     --shadow-color: rgba(0, 0, 0, 0.3);
     --favorite-item-bg: #3a3a3a;
+    --toast-bg: rgba(35, 35, 35, 0.9);
+    --toast-success: #5fd364;
+    --toast-warning: #ffb74d;
 }
 
 /* Genel Stiller */
@@ -254,5 +260,74 @@ footer {
     
     .btn {
         width: 100%;
+    }
+}
+
+/* Toast Bildirim */
+.toast-container {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+}
+
+.toast {
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    background-color: var(--toast-bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: slideUp 0.3s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.toast.success {
+    border-left: 4px solid var(--toast-success);
+}
+
+.toast.warning {
+    border-left: 4px solid var(--toast-warning);
+}
+
+.toast-message {
+    flex-grow: 1;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.toast-close:hover {
+    opacity: 1;
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
     }
 } 
