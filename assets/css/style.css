@@ -2,35 +2,36 @@
 
 /* Tema Değişkenleri */
 :root {
-    --background: #FDFDFD;
-    --card-bg: #fff;
-    --text-color: #222831;
-    --text-secondary: #555;
-    --primary-color: #00ADB5;
-    --primary-hover: #008e96;
-    --secondary-bg: #eee;
-    --secondary-hover: #ddd;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --favorite-item-bg: #f8f8f8;
-    --toast-bg: rgba(0, 0, 0, 0.8);
-    --toast-success: #4caf50;
-    --toast-warning: #ff9800;
+    --background: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #3a3f44;
+    --text-secondary: #6c757d;
+    --primary-color: #5fb0bd;
+    --primary-hover: #4a9aa7;
+    --secondary-bg: #f0f3f5;
+    --secondary-hover: #e1e7ea;
+    --shadow-color: rgba(0, 0, 0, 0.06);
+    --favorite-item-bg: #f9fafb;
+    --toast-bg: rgba(60, 65, 68, 0.85);
+    --toast-success: #7cc992;
+    --toast-warning: #ffca80;
+    --border-radius: 12px;
 }
 
 [data-theme="dark"] {
-    --background: #1c1c1c;
-    --card-bg: #2d2d2d;
-    --text-color: #f0f0f0;
-    --text-secondary: #aaa;
-    --primary-color: #00ADB5;
-    --primary-hover: #00c3cc;
-    --secondary-bg: #444;
-    --secondary-hover: #555;
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --favorite-item-bg: #3a3a3a;
-    --toast-bg: rgba(35, 35, 35, 0.9);
-    --toast-success: #5fd364;
-    --toast-warning: #ffb74d;
+    --background: #292d35;
+    --card-bg: #343a40;
+    --text-color: #e9ecef;
+    --text-secondary: #adb5bd;
+    --primary-color: #5fb0bd;
+    --primary-hover: #70c8d5;
+    --secondary-bg: #495057;
+    --secondary-hover: #5a6268;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --favorite-item-bg: #3e4348;
+    --toast-bg: rgba(33, 37, 41, 0.9);
+    --toast-success: #86d39c;
+    --toast-warning: #ffd699;
 }
 
 /* Genel Stiller */
@@ -58,7 +59,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px;
-    transition: background-color 0.3s ease;
+    transition: all 0.4s ease;
     position: relative;
     z-index: 1;
 }
@@ -67,17 +68,18 @@ body {
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px var(--shadow-color);
+    padding: 28px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 30px var(--shadow-color);
     background-color: var(--card-bg);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0,0,0,0.03);
 }
 
 /* Başlık */
 header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     position: relative;
     display: flex;
     align-items: center;
@@ -85,8 +87,9 @@ header {
 }
 
 h1 {
-    font-weight: 600;
+    font-weight: 500;
     color: var(--primary-color);
+    letter-spacing: 0.5px;
 }
 
 /* Tema Değiştirme Butonu */
@@ -100,36 +103,46 @@ h1 {
     cursor: pointer;
     padding: 5px;
     border-radius: 50%;
-    transition: transform 0.3s ease;
+    transition: all 0.4s ease;
+    opacity: 0.85;
 }
 
 .theme-toggle:hover {
-    transform: rotate(30deg);
+    transform: rotate(30deg) scale(1.1);
+    opacity: 1;
 }
 
 /* Ana İçerik */
 main {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .quote-container {
-    margin-bottom: 40px;
+    margin-bottom: 45px;
     text-align: center;
+    padding: 10px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-blockquote {
+blockquote, .quote-text {
     font-size: 24px;
     font-weight: 400;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     position: relative;
-    padding: 0 20px;
+    padding: 5px 25px;
+    line-height: 1.7;
+    transition: opacity 0.3s ease-in-out;
 }
 
 blockquote::before,
 blockquote::after {
     content: '"';
-    font-size: 36px;
+    font-size: 42px;
     color: var(--primary-color);
+    opacity: 0.7;
 }
 
 blockquote::after {
@@ -141,6 +154,8 @@ blockquote::after {
     font-weight: 300;
     color: var(--text-secondary);
     text-align: right;
+    margin-top: 8px;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .author::before {
@@ -151,23 +166,24 @@ blockquote::after {
 .actions {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
+    gap: 18px;
+    margin: 25px 0;
     flex-wrap: wrap;
 }
 
 .btn {
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: none;
-    border-radius: 6px;
+    border-radius: 25px;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     font-size: 16px;
     text-decoration: none;
     display: inline-block;
     text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .primary {
@@ -177,6 +193,8 @@ blockquote::after {
 
 .primary:hover {
     background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
 }
 
 .secondary {
@@ -186,22 +204,28 @@ blockquote::after {
 
 .secondary:hover {
     background-color: var(--secondary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
 }
 
 /* Footer */
 footer {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .favorites-link {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 6px 12px;
+    border-radius: 15px;
 }
 
 .favorites-link:hover {
-    text-decoration: underline;
+    background-color: var(--secondary-bg);
+    text-decoration: none;
 }
 
 /* Favoriler Sayfası */
@@ -213,15 +237,23 @@ footer {
 
 .favorite-item {
     background-color: var(--favorite-item-bg);
-    padding: 20px;
-    border-radius: 6px;
+    padding: 22px;
+    border-radius: var(--border-radius);
     position: relative;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.favorite-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--shadow-color);
 }
 
 .favorite-quote {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    line-height: 1.6;
 }
 
 .favorite-author {
@@ -231,23 +263,41 @@ footer {
 
 .delete-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     background: none;
     border: none;
     cursor: pointer;
     font-size: 18px;
-    color: #ff6b6b;
+    color: #ff8a8a;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .delete-btn:hover {
-    color: #ff0000;
+    color: #ff6b6b;
+    opacity: 1;
+    background-color: rgba(255, 230, 230, 0.2);
+}
+
+/* No favorites */
+.no-favorites {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 30px;
+    font-style: italic;
 }
 
 /* Responsive */
 @media (max-width: 600px) {
     .container {
-        padding: 15px;
+        padding: 20px;
     }
     
     blockquote {
@@ -263,29 +313,28 @@ footer {
     }
 }
 
-/* Toast Bildirim */
+/* Toast Notifications */
 .toast-container {
     position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 20px;
+    right: 20px;
     z-index: 1000;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 300px;
 }
 
 .toast {
+    min-width: 250px;
     padding: 15px 20px;
-    border-radius: 8px;
-    color: white;
+    border-radius: var(--border-radius);
     background-color: var(--toast-bg);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    animation: slideUp 0.3s ease-out forwards;
+    align-items: center;
+    animation: slideUp 0.3s ease forwards, fadeOut 0.5s ease forwards 3s;
     opacity: 0;
     transform: translateY(20px);
 }
@@ -300,34 +349,37 @@ footer {
 
 .toast-message {
     flex-grow: 1;
-    font-weight: 500;
-    font-size: 15px;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .toast-close {
     background: none;
     border: none;
+    color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
-    color: white;
     font-size: 16px;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
+    transition: all 0.3s ease;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .toast-close:hover {
-    opacity: 1;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 @keyframes slideUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes fadeOut {
-    to {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
+    0% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-10px); }
 } 

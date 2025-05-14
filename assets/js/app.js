@@ -10,70 +10,25 @@ const toastContainer = document.getElementById('toast-container');
 
 // Geçerli söz
 let currentQuote = null;
+// Tüm sözler
+let quotes = [];
 
-// Sabit sözler dizisi (JSON yerine doğrudan tanımlama)
-const quotes = [
-  {
-    "text": "Hayat, kendini gerçekleştirebilenlere cömert davranır.",
-    "author": "Goethe"
-  },
-  {
-    "text": "Şu an bulunduğun yer, geçmişte verdiğin kararların bir sonucudur.",
-    "author": "Tony Robbins"
-  },
-  {
-    "text": "Cesur olun. Başarısız olsanız bile, başınız dik başarısız olun.",
-    "author": "Che Guevara"
-  },
-  {
-    "text": "En büyük zafer, insanın kendini yenmesidir.",
-    "author": "Platon"
-  },
-  {
-    "text": "Hayal gücü, bilgiden daha önemlidir.",
-    "author": "Albert Einstein"
-  },
-  {
-    "text": "Başarının sırrı, başlamaktır.",
-    "author": "Mark Twain"
-  },
-  {
-    "text": "Hayattaki en büyük zafer, hiç düşmemek değil; her düştüğünde yeniden ayağa kalkmaktır.",
-    "author": "Nelson Mandela"
-  },
-  {
-    "text": "Hayat, yaşanırken anlaşılmaz, ancak geriye dönüp bakılarak anlaşılabilir.",
-    "author": "Søren Kierkegaard"
-  },
-  {
-    "text": "Dünyayı değiştirmek istiyorsan, kendinden başla.",
-    "author": "Sokrates"
-  },
-  {
-    "text": "Seni öldürmeyen şey, güçlendirir.",
-    "author": "Friedrich Nietzsche"
-  },
-  {
-    "text": "Kendini başkalarıyla değil, dünkü kendinle kıyasla.",
-    "author": "Ernest Hemingway"
-  },
-  {
-    "text": "Küçük şeylerde büyük olmak, gerçek büyüklüktür.",
-    "author": "Atatürk"
-  },
-  {
-    "text": "Zorluklara karşı sabır, büyük bir güçtür.",
-    "author": "Budha"
-  },
-  {
-    "text": "Yaşamak için bir neden bulan kişi, nasıl olduğuna her türlü katlanabilir.",
-    "author": "Friedrich Nietzsche"
-  },
-  {
-    "text": "Dün bir kelimedir, yarın bir kelimedir, bugün hakkıyla yaşamaktır.",
-    "author": "Rumi"
-  }
-];
+// Sözleri JSON dosyasından yükle
+async function loadQuotes() {
+    try {
+        const response = await fetch('data/quotes.json');
+        if (!response.ok) {
+            throw new Error('Sözler yüklenemedi.');
+        }
+        quotes = await response.json();
+        // İlk söz gösterimi
+        displayRandomQuote();
+    } catch (error) {
+        console.error('Sözler yüklenirken hata oluştu:', error);
+        quoteText.textContent = 'Sözler yüklenemedi. Lütfen daha sonra tekrar deneyin.';
+        quoteAuthor.textContent = '';
+    }
+}
 
 // Toast Bildirim Göster
 function showToast(message, type = 'success') {
@@ -90,22 +45,28 @@ function showToast(message, type = 'success') {
     // Toast'u konteynere ekle
     toastContainer.appendChild(toast);
     
-    // Toast animasyonu ve otomatik kapanma
-    setTimeout(() => {
-        toast.style.animation = 'fadeOut 0.3s ease-out forwards';
-        setTimeout(() => {
-            toast.remove();
-        }, 300);
-    }, 3000);
-    
     // Kapatma butonuna tıklama olayı
     const closeBtn = toast.querySelector('.toast-close');
     closeBtn.addEventListener('click', () => {
-        toast.style.animation = 'fadeOut 0.3s ease-out forwards';
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-10px)';
         setTimeout(() => {
             toast.remove();
         }, 300);
     });
+    
+    // Otomatik kapanma için timeout
+    setTimeout(() => {
+        if (toast.parentElement) {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.remove();
+                }
+            }, 300);
+        }
+    }, 3000);
 }
 
 // Rastgele söz göster
@@ -116,11 +77,21 @@ function displayRandomQuote() {
         return;
     }
     
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    currentQuote = quotes[randomIndex];
+    // Animasyonla söz değiştirme
+    quoteText.style.opacity = 0;
+    quoteAuthor.style.opacity = 0;
     
-    quoteText.textContent = currentQuote.text;
-    quoteAuthor.textContent = currentQuote.author;
+    setTimeout(() => {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        currentQuote = quotes[randomIndex];
+        
+        quoteText.textContent = currentQuote.text;
+        quoteAuthor.textContent = currentQuote.author;
+        
+        // Animasyonla gösterme
+        quoteText.style.opacity = 1;
+        quoteAuthor.style.opacity = 1;
+    }, 300);
 }
 
 // Favorilere ekle
@@ -172,6 +143,17 @@ function loadSavedTheme() {
     updateThemeIcon(savedTheme);
 }
 
+// CSS Geçiş Animasyonları
+function addTransitionStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .quote-text, .author {
+            transition: opacity 0.3s ease;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
 // Event Listeners
 newQuoteBtn.addEventListener('click', displayRandomQuote);
 addFavoriteBtn.addEventListener('click', addToFavorites);
@@ -180,5 +162,6 @@ themeToggleBtn.addEventListener('click', toggleTheme);
 // Sayfa yüklendiğinde
 document.addEventListener('DOMContentLoaded', () => {
     loadSavedTheme();
-    displayRandomQuote();
+    addTransitionStyles();
+    loadQuotes();
 }); 

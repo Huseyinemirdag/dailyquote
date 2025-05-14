@@ -20,22 +20,28 @@ function showToast(message, type = 'success') {
     // Toast'u konteynere ekle
     toastContainer.appendChild(toast);
     
-    // Toast animasyonu ve otomatik kapanma
-    setTimeout(() => {
-        toast.style.animation = 'fadeOut 0.3s ease-out forwards';
-        setTimeout(() => {
-            toast.remove();
-        }, 300);
-    }, 3000);
-    
     // Kapatma butonuna tıklama olayı
     const closeBtn = toast.querySelector('.toast-close');
     closeBtn.addEventListener('click', () => {
-        toast.style.animation = 'fadeOut 0.3s ease-out forwards';
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-10px)';
         setTimeout(() => {
             toast.remove();
         }, 300);
     });
+    
+    // Otomatik kapanma için timeout
+    setTimeout(() => {
+        if (toast.parentElement) {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.remove();
+                }
+            }, 300);
+        }
+    }, 3000);
 }
 
 // Favorileri Yükle ve Göster
