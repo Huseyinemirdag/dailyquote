@@ -28,7 +28,7 @@ Bu uygulama tamamen istemci taraflı çalışır ve herhangi bir kurulum gerekti
 
 1. Repository'yi klonlayın:
    ```bash
-   git clone https://github.com/kullanici-adi/Daily-Quote.git
+   git clone https://github.com/Huseyinemirdag/dailyquote.git
    ```
 
 2. İndirilen klasöre gidin:
